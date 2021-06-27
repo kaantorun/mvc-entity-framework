@@ -1,0 +1,148 @@
+﻿@model ACuteArtInterface.Models.ArtistModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<link href="@Url.Content("~/css/modal.css")" rel="stylesheet" type="text/css" />
+
+<div>
+    <h4>Artist</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ArtistId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ArtistId)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Order)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Order)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <!-- Modal -->
+            <div id="dataTargetImageUrl" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">@Model.NameEn Image URL Picture</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <img src=@Model.ImageUrl />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" data-toggle="modal" data-target="#dataTargetImageUrl">Image Url Picture</button>
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ThumbUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <!-- Modal -->
+            <div id="dataTargetThumbUrl" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">@Model.NameEn Thumb URL Picture</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <img src=@Model.ThumbUrl />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" data-toggle="modal" data-target="#dataTargetThumbUrl">Thumb URL Picture</button>
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IconUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <!-- Modal -->
+            <div id="dataTargetIconUrl" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">@Model.NameEn Icon URL Picture</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <img src=@Model.IconUrl />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" data-toggle="modal" data-target="#dataTargetIconUrl">Icon URL Picture</button>
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Guid)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Guid)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreationTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreationTime)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ArtistId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+

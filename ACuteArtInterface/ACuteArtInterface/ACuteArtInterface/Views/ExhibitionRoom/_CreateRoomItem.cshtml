@@ -1,0 +1,82 @@
+﻿@model ACuteArtInterface.Models.ExhibitionRoomModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" style="width: 1000px" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="4" style="width: 1000px"> </textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExhibitionId" class="control-label"></label>
+                <select asp-for="ExhibitionId" class="form-control" asp-items="ViewBag.ExhibitionID">
+                    <option selected="selected">--- select Exhibition ---</option>
+                </select>
+                <span asp-validation-for="ExhibitionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order" class="control-label"></label>
+                <input asp-for="Order" class="form-control" />
+                <span asp-validation-for="Order" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScanRadius" class="control-label"></label>
+                <input asp-for="ScanRadius" class="form-control" />
+                <span asp-validation-for="ScanRadius" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShowOnMap" class="control-label"></label>
+                <input asp-for="ShowOnMap" class="form-control" />
+                <span asp-validation-for="ShowOnMap" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VaGuid" class="control-label"></label>
+                <input asp-for="VaGuid" class="form-control" />
+                <span asp-validation-for="VaGuid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MapIconUrl" class="control-label"></label>
+                <input asp-for="MapIconUrl" class="form-control" name="MapIconUrlFile" type="file" accept="image/gif, image/jpeg, image/png" />
+                <span asp-validation-for="MapIconUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MapUrl" class="control-label"></label>
+                <input asp-for="MapUrl" class="form-control" name="MapUrlFile" type="file" accept="image/gif, image/jpeg, image/png" />
+                <span asp-validation-for="MapUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThumbUrl" class="control-label"></label>
+                <input asp-for="ThumbUrl" class="form-control" name="ThumbUrlFile" type="file" accept="image/gif, image/jpeg, image/png" />
+                <span asp-validation-for="ThumbUrl" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IconUrl" class="control-label"></label>
+                <input asp-for="IconUrl" class="form-control" name="IconUrlFile" type="file" accept="image/gif, image/jpeg, image/png" />
+                <span asp-validation-for="IconUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

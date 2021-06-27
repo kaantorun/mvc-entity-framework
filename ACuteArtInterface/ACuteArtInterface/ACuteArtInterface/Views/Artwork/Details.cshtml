@@ -1,0 +1,240 @@
+﻿@model ACuteArtInterface.Models.ArtworkModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<link href="@Url.Content("~/css/modal.css")" rel="stylesheet" type="text/css" />
+
+<h1>Artworks</h1>
+<h2>Details</h2>
+
+<div>
+    <h4>Artwork</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt class="col-sm-2">
+            Artist
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Artist.Name)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SourceMeta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SourceMeta)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PrefabName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PrefabName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MarshalCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MarshalCode)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SizeDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SizeDescription)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EditionSize)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EditionSize)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <!-- Modal -->
+            <div id="dataTargetImageUrl" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">@Model.NameEn Image URL Picture</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <img src=@Model.ImageUrl />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" data-toggle="modal" data-target="#dataTargetImageUrl">Image Url Picture</button>
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ThumbUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <!-- Modal -->
+            <div id="dataTargetThumbUrl" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">@Model.NameEn Thumb URL Picture</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <img src=@Model.ThumbUrl />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" data-toggle="modal" data-target="#dataTargetThumbUrl">Thumb URL Picture</button>
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TradeUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <!-- Modal -->
+            <div id="dataTargetTradeUrl" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">@Model.NameEn Trade URL Picture</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <img src=@Model.TradeUrl />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" data-toggle="modal" data-target="#dataTargetTradeUrl">Trade URL Picture</button>
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SignUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <!-- Modal -->
+            <div id="dataTargetSignUrl" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">@Model.NameEn Sign URL Picture</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <img src=@Model.SignUrl />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" data-toggle="modal" data-target="#dataTargetSignUrl">Sign URL Picture</button>
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Guid)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Guid)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Creation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Creation)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.WpId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.WpId)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ApSize)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ApSize)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ArtworkId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+

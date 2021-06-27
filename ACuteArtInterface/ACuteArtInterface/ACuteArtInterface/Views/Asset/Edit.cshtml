@@ -1,0 +1,85 @@
+﻿@model ACuteArtInterface.Models.AssetModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<link href="@Url.Content("~/css/modal.css")" rel="stylesheet" type="text/css" />
+
+<h1>Asset</h1>
+<h2>Edit</h2>
+
+<!-- Modal -->
+<div id="dataTargetImageUrl" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Hero Intro Image URL Picture</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src=@Model.AssetValue />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AssetId" />
+            <div class="form-group">
+                <label asp-for="AssetKey" class="control-label"></label>
+                <input asp-for="AssetKey" class="form-control" readonly style="width: 1000px" />
+            </div>
+            <div class="form-group">
+                <label asp-for="AssetValueFile" class="control-label"></label>
+                <input asp-for="AssetValue" value="@Model.AssetValue" disabled class="form-control" style="width: 1000px" />
+                <input asp-for="AssetValueFile" class="form-control" name="AssetValueFile" id="AssetValueFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <button type="button" data-toggle="modal" data-target="#dataTargetImageUrl">Show</button>
+                <span asp-validation-for="AssetValueFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="button" data-toggle="modal" class="btn btn-primary" data-target="#myModal" value="Save" />
+            </div>
+
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to edit this record?
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" value="Save" id="btnEdit" class="btn btn-primary" />
+                            <input type="button" value="Close" class="btn btn-primary" data-dismiss="modal" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Home">Back to Home</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

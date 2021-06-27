@@ -1,0 +1,63 @@
+﻿@model ACuteArtInterface.Models.ArtistModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h1>Artists</h1>
+<h2>Create</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" style="width: 1000px" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="4" style="width: 1000px"> </textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" style="width: 1000px" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order" class="control-label"></label>
+                <input asp-for="Order" class="form-control" />
+                <span asp-validation-for="Order" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IconUrl" class="control-label"></label>
+                <input asp-for="IconUrl" name="IconUrlFile" class="form-control" type="file" />
+                <span asp-validation-for="IconUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" name="ImageUrlFile" class="form-control" type="file" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThumbUrl" class="control-label"></label>
+                <input asp-for="ThumbUrl" name="ThumbUrlFile" class="form-control" type="file" />
+                <span asp-validation-for="ThumbUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

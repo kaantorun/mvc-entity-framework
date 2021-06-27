@@ -1,0 +1,219 @@
+﻿@model PaginatedList<ACuteArtInterface.Models.ExhibitionRoomModel>
+
+@{ ViewData["Title"] = "Exhibition Room"; }
+
+<link href="@Url.Content("~/css/modal.css")" rel="stylesheet" type="text/css" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<h1>Exhibition Room</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Title/Description/Exhibition Title: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Title</a></th>
+            <th>
+                Description
+            </th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["ExhibitionTitleSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Exhibition Title</a></th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["OrderSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Order</a></th>
+            <th>Scan Radius</th>
+            <th>Show On Map</th>
+            <th>Va Guid </th>
+            <th>Va</th>
+            <th>Active</th>
+            <th>Map Icon Url</th>
+            <th>Map Url</th>
+            <th>Icon Url</th>
+            <th>Thumb Url</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{ var thb = 0; var icn = 0; var map = 0; var mapi = 0;
+
+
+            foreach (var item in Model)
+            {
+                var dataTargetMapIconUrl = "modelShowPictureMapIcon" + item.ExhibitionId + mapi;
+                var dataTargetMapUrl = "modelShowPictureMap" + item.ExhibitionId + map;
+                var dataTargetIconUrl = "modelShowPictureIcon" + item.ExhibitionId + icn;
+                var dataTargetThumbUrl = "modelShowPictureThumb" + item.ExhibitionId + thb;
+
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TitleEn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescriptionEn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Exhibition.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Order)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ScanRadius)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShowOnMap)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VaGuid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Va)
+                    </td>
+                    <td>
+                        @( item.Active ? "Yes" : "No" )
+                    </td>
+                    <td>
+                        <!-- Modal -->
+                        <div id=@dataTargetMapIconUrl class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">@item.TitleEn Map Icon URL Picture</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="@item.MapIconUrl" />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <button type="button" data-toggle="modal" data-target="#@dataTargetMapIconUrl">Show</button>
+                    </td>
+                    <td>
+                        <!-- Modal -->
+                        <div id=@dataTargetMapUrl class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">@item.TitleEn Map URL Picture</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="@item.MapUrl" />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <button type="button" data-toggle="modal" data-target="#@dataTargetMapUrl">Show</button>
+                    </td>
+                    <td>
+                        <!-- Modal -->
+                        <div id=@dataTargetIconUrl class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">@item.TitleEn Icon URL Picture</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="@item.IconUrl" />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <button type="button" data-toggle="modal" data-target="#@dataTargetIconUrl">Show</button>
+                    </td>
+                    <td>
+                        <!-- Modal -->
+                        <div id=@dataTargetThumbUrl class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">@item.TitleEn Thumb URL Picture</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="@item.ThumbUrl" />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <button type="button" data-toggle="modal" data-target="#@dataTargetThumbUrl">Show</button>
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "ExhibitionRoom", new { id = item.RoomId }) |
+                        @Html.ActionLink("Details", "Details", "ExhibitionRoom", new { id = item.RoomId })
+                    </td>
+                </tr>
+
+                thb++; icn++; map++; mapi++;
+            } }
+    </tbody>
+</table>
+
+@{ var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : ""; }
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
+
+<script>
+    $('#myPager').on('click', 'a', function (e) {
+        //prevent action link normal functionality
+        e.preventDefault();
+        if (this.href != null && this.href != "") {
+            $.ajax({
+                url: this.href,
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#Preview').html(result);
+                }
+            });
+            return false;
+        }
+    });
+</script>

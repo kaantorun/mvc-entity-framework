@@ -1,0 +1,81 @@
+﻿@model ACuteArtInterface.Models.ExhibitionRoomModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h1>Exhibition Rooms</h1>
+<h2>Create</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" style="width: 1000px" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="4" style="width: 1000px"> </textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExhibitionId" class="control-label"></label>
+                <select asp-for="ExhibitionId" class="form-control" asp-items="ViewBag.ExhibitionID">
+                    <option selected="selected">--- select Exhibition ---</option>
+                </select>
+                <span asp-validation-for="ExhibitionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order" class="control-label"></label>
+                <input asp-for="Order" class="form-control" />
+                <span asp-validation-for="Order" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScanRadius" class="control-label"></label>
+                <input asp-for="ScanRadius" class="form-control" />
+                <span asp-validation-for="ScanRadius" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShowOnMap" class="control-label"></label>
+                <input asp-for="ShowOnMap" class="form-control" />
+                <span asp-validation-for="ShowOnMap" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VaGuid" class="control-label"></label>
+                <input asp-for="VaGuid" class="form-control" />
+                <span asp-validation-for="VaGuid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MapIconUrlFile" class="control-label"></label>
+                <input asp-for="MapIconUrlFile" class="form-control" name="MapIconUrlFile" id="MapIconUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <span asp-validation-for="MapIconUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MapUrlFile" class="control-label"></label>
+                <input asp-for="MapUrlFile" class="form-control" name="MapUrlFile" id="MapUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <span asp-validation-for="MapUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThumbUrlFile" class="control-label"></label>
+                <input asp-for="ThumbUrlFile" class="form-control" name="ThumbUrlFile" id="ThumbUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <span asp-validation-for="ThumbUrlFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IconUrlFile" class="control-label"></label>
+                <input asp-for="IconUrlFile" class="form-control" name="IconUrlFile" id="IconUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <span asp-validation-for="IconUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

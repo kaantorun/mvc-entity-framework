@@ -1,0 +1,177 @@
+﻿@model ACuteArtInterface.Models.ExhibitionModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<link rel="stylesheet" href="~/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="~/lib/bootstrap/dist/js//bootstrap.bundle.min.js"></script>
+
+<script type="text/javascript" src="~/lib/bootstrap/dist/js//jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="~/lib/bootstrap/dist/js/slick.min.js"></script>
+
+<script src="~/lib/bootstrap/dist/js/jquery.validate.min.js"></script>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap-select.min.js"></script>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap-multiselect.js" type="text/javascript"></script>
+<link href="~/css/modal.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        // Enable Live Search.
+        $('#UserList').attr('data-live-search', true);
+        $('#ArtworkList').attr('data-live-search', true);
+
+        $('.selectpicker').selectpicker(
+        {
+            width: '100%',
+            //style: 'btn-warning',
+        });
+
+        $('.ddlArtworks').selectpicker(
+        {
+            width: '100%',
+            //style: 'btn-warning',
+        });
+
+        $('#ddlArtworks').multiselect({
+            includeSelectAllOption: true,
+            enableCaseInsensitiveFiltering: true,
+            enableFiltering: true,
+            maxHeight: 200
+        });
+    });
+
+</script>
+
+<h1>Exhibitions</h1>
+<h2>Create</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" style="width: 1000px" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="4" style="width: 1000px"> </textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OwnerId" class="control-label"></label>
+                @Html.DropDownListFor(m => m.OwnerId, (IEnumerable<SelectListItem>)ViewBag.UserList, new { id = "UserList", @class = "selectpicker" })
+                <span asp-validation-for="OwnerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Artwork" class="control-label"></label><br />
+                @Html.ListBoxFor(model => model.ExhibitionArtworkIds, new MultiSelectList(ViewBag.ArtworkList, "Value", "Text"), new { @class = "show-tick form-control", multiple = "multiple", id = "ddlArtworks" })
+            </div>
+            <div class="form-group">
+                <label asp-for="GeoFenced" class="control-label"></label>
+                <input asp-for="GeoFenced" class="form-control" />
+                <span asp-validation-for="GeoFenced" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Latitude" class="control-label"></label>
+                <input asp-for="Latitude" class="form-control" />
+                <span asp-validation-for="Latitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Longitude" class="control-label"></label>
+                <input asp-for="Longitude" class="form-control" />
+                <span asp-validation-for="Longitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Radius" class="control-label"></label>
+                <input asp-for="Radius" class="form-control" />
+                <span asp-validation-for="Radius" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" type="date" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" type="date" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Active" class="control-label"></label>
+                <input asp-for="Active" class="form-control" />
+                <span asp-validation-for="Active" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order" class="control-label"></label>
+                <input asp-for="Order" class="form-control" />
+                <span asp-validation-for="Order" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UseGps" class="control-label"></label>
+                <input asp-for="UseGps" class="form-control" />
+                <span asp-validation-for="UseGps" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScanRadius" class="control-label"></label>
+                <input asp-for="ScanRadius" class="form-control" />
+                <span asp-validation-for="ScanRadius" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShowRadius" class="control-label"></label>
+                <input asp-for="ShowRadius" class="form-control" />
+                <span asp-validation-for="ShowRadius" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ViewRadius" class="control-label"></label>
+                <input asp-for="ViewRadius" class="form-control" />
+                <span asp-validation-for="ViewRadius" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MainMapUrlFile" class="control-label"></label>
+                <input asp-for="MainMapUrlFile" class="form-control" name="MainMapUrlFile" id="MainMapUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <span asp-validation-for="MainMapUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MapUrlFile" class="control-label"></label>
+                <input asp-for="MapUrlFile" class="form-control" name="MapUrlFile" id="MapUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <span asp-validation-for="MapUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IconUrlFile" class="control-label"></label>
+                <input asp-for="IconUrlFile" class="form-control" name="IconUrlFile" id="IconUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <span asp-validation-for="IconUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThumbUrlFile" class="control-label"></label>
+                <input asp-for="ThumbUrlFile" class="form-control" name="ThumbUrlFile" id="ThumbUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <span asp-validation-for="ThumbUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IntroUrlFile" class="control-label"></label>
+                <input asp-for="IntroUrlFile" class="form-control" name="IntroUrlFile" id="IntroUrlFile" type="file" accept="video/mp4" />
+                <span asp-validation-for="IntroUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HowtoFile" class="control-label"></label>
+                <input asp-for="HowtoFile" class="form-control" name="HowtoFile" id="HowtoFile" type="file" accept="video/mp4" />
+                <span asp-validation-for="HowtoFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,103 @@
+﻿@model ACuteArtInterface.ViewModels.ArtistListViewModel
+
+<link href="@Url.Content("~/css/modal.css")" rel="stylesheet" type="text/css" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/1.0.5/jquery.tablednd.min.js" asp-append-version="true"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/1.0.5/jquery.tablednd.js" asp-append-version="true"></script>
+
+@{ ViewData["Title"] = "Artists"; }
+
+<h1>Artists</h1>
+
+<script type="text/javascript">
+    $(function () {
+
+        // Initialise the first table (as before)
+        $("#table-1").tableDnD({
+            onDrop: function (table, row) {
+                var allIDs = $.map($(table).find("input[type=hidden][id*=1]"), function (item, index) {
+                    alert($(item).val());
+                    return $(item).val();
+                    
+                });
+                //PageMethods.Reorder(allIDs, onSucceeded, onFailed);
+            }
+        });
+
+       
+
+        //$("#btnSaveOrder").click(function () {
+
+        //    var items = $("#table-1 row");
+        //    alert(items);
+        //    var linkIDs = [items.size()];
+            
+        //    //var index = 0;
+
+        //    //// ----- Iterate through each li, extracting the ID embedded as an attribute
+        //    //items.each(
+        //    //    function (intIndex) {
+        //    //        linkIDs[index] = $(this).attr("ExampleItemID");
+        //    //        index++;
+        //    //    });
+
+        //    //$get("<%=txtExampleItemsOrder.ClientID %>").value = linkIDs.join(",");
+
+
+        //    //$.ajax({
+        //    //    url: "/Artist/ReOrder",
+        //    //    data: { json: $.tableDnD.serialize() },
+        //    //    success: function (result) {
+        //    //        $('#table-1').html(result);
+        //    //    }
+        //    //});
+        //});
+        
+    });
+
+</script>
+<form asp-action="ReorderSubmit" method="post">
+<table class="table" id="table-1" >
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Full Name</th>
+            <th>Description</th>
+            <th>Order</th>
+            <th>Active</th>
+            <th></th>
+            <th><input type="submit" value="SaveOrder" id="btnSaveOrder" /></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{for (int i = 0; i < Model.Artists.Count; i++)
+           {
+
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Artists[i].NameEn)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Artists[i].FullNameEn)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Artists[i].DescriptionEn)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Artists[i].Order)
+    </td>
+    <td>
+        @( Model.Artists[i].Active ? "Yes" : "No" )
+    </td>
+    <td></td>
+</tr>
+        @Html.HiddenFor(modelItem => Model.Artists[i].ArtistId)   
+                @Html.HiddenFor(modelItem => Model.Artists[i].Name)   
+                @Html.HiddenFor(modelItem => Model.Artists[i].Order)   
+} }
+    </tbody>
+</table>
+</form>

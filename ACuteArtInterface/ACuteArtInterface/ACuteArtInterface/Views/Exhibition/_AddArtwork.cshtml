@@ -1,0 +1,159 @@
+﻿@*@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<ACuteArtInterface.Models.ArtworkModel>
+
+<link href="@Url.Content("~/css/PagedList.css")" rel="stylesheet" type="text/css" />
+
+<form asp-action="SaveArtworks" role="form" id="myForm">
+    <div class="panel panel-default" id="filter">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th><a asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Name</a></th>
+                    <th>Prefab Name</th>
+                    <th>Email</th>
+                    <th><input type="hidden" name="ExhibitinId" asp-for="@ViewData["exhibitionId"]" value="@ViewData["ExhibitionId"]" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    @Html.HiddenFor(model => item.ArtworkId);
+                    <tr>
+                        <td><input asp-for="@item.Checked" type="checkbox" /></td>
+                        <td>@item.Name</td>
+                        <td>@item.PrefabName</td>
+                        <td>@Html.ActionLink("Select Artwork", "Edit", "Exhibition", new { id = @ViewData["exhibitionId"], userId = item.ArtworkId }, new { @class = "btn btn-success btn-xs close", data_dismiss = "modal", data_toggle = "modal", data_target = "#myModal" })</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <input type="submit" value="Save" id="btnSave" />
+</form>
+    <div id="myPager">
+        <p>
+            Find by Name/E-Mail: <input id="SearchString" name="SearchString" type="text" value="" />
+            <input type="button" value="Search" id="btnSearch" /> | <input type="button" value="Clear Filter" id="btnClear" />
+        </p>
+        @Html.PagedListPager((X.PagedList.IPagedList)Model,
+                  page => Url.Action(
+                      "AddArtwork",
+                      new
+                      {
+                          sortOrder = ViewBag.CurrentSort,
+                          currentFilter = ViewBag.CurrentFilter,
+                          searchString = ViewBag.SearchString,
+                          pageNumber = page,
+                          exhibitionId = @ViewData["exhibitionId"]
+                      }
+                  )
+              )
+    </div>
+
+    <script>
+
+    //Everytime we press delete in the table row
+    $('.close').click(function (e) {
+        e.preventDefault();
+        $('#myModal').modal('hide');
+        //var newUrl = window.location.origin + window.location.pathname + "?userId=" + e.userId;
+        //window.location.href = newUrl;
+
+        //location.reload();
+    });
+
+    window.addEventListener("popstate", function (e) {
+        $.ajax({
+            url: location.href,
+            success: function (result) {
+                $('#PreviewArtwork').html(result);
+            }
+        });
+    });
+
+    $('#myPager').on('click', 'a', function (e) {
+        //prevent action link normal functionality
+        e.preventDefault();
+        if (this.href != null && this.href != "") {
+            $.ajax({
+                url: this.href,
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#PreviewArtwork').html(result);
+                }
+            });
+            return false;
+        }
+    });
+
+    $('#filter').on('click', 'a', function (e) {
+        //prevent action link normal functionality
+        e.preventDefault();
+        if (this.href != null && this.href != "") {
+            $.ajax({
+                url: this.href,
+                type: 'GET',
+                data: { sortOrder: "NameSortParm", currentFilter: $("#SearchString").val(), searchString: $("#SearchString").val(), exhibitionId: @ViewData["ExhibitionId"]  },
+                cache: false,
+                success: function (result) {
+                    $('#PreviewArtwork').html(result);
+                }
+            });
+            return false;
+        }
+    });
+
+    $(function () {
+        $("#btnSearch").click(function () {
+            search();
+        });
+
+        $("#btnClear").click(function () {
+            clear();
+        });
+
+        $("#SearchString").keypress(function (e) {
+            if (e.keyCode == 13) {
+                search();
+            }
+        });
+
+        $("#btnSelectUser").click(function () {
+            selectUser();
+        });
+
+        function selectUser() {
+
+            $.ajax({
+                url: "/Exhibition/AddArtwork",
+                data: { exhibitionId: $("#exhibitionId").val(), userId: $("#selectedUserItem").val() },
+                success: function (result) {
+                    $('#PreviewArtwork').html(result);
+                }
+            });
+        }
+
+        function search() {
+
+            $.ajax({
+                url: "/Exhibition/AddArtwork?searchString=" + $('#SearchString').val() + "&exhibitionId=" + @ViewData["ExhibitionId"],
+                success: function (result) {
+                    //ChangeUrl("index", "/Exhibition/SearchUser?searchString=" + $('#SearchString').val());
+                    $('#PreviewArtwork').html(result);
+                }
+            });
+        }
+
+        function clear() {
+            $.ajax({
+                url: "/Exhibition/AddArtwork?exhibitionId=" + @ViewData["ExhibitionId"],
+                success: function (result) {
+                    $('#PreviewArtwork').html(result);
+                }
+            });
+        }
+    });
+    </script>*@

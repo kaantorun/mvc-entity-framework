@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Acute Art Interface System</p>
+    @{ 
+        var welcomeMessage = "";
+
+        if (DateTime.Now.Hour < 12)
+        {
+            welcomeMessage = "Good Morning!";
+        }
+        else if (DateTime.Now.Hour < 17)
+        {
+            welcomeMessage = "Good Afternoon!";
+        }
+        else
+        {
+            welcomeMessage = "Good Evening!";
+        }
+
+        <p>@welcomeMessage</p>
+        <a href="https://www.facebook.com/acuteartVR/"><img src="~/img/fb.png" /> </a>
+        <a href="https://www.instagram.com/acuteart/"><img src="~/img/instagram.png" /></a>
+        <a href="https://twitter.com/acuteart"><img src="~/img/twitter.png" /></a>
+        <a href="https://www.youtube.com/c/AcuteArtVR"><img src="~/img/youtube.png" /></a>
+    }
+</div>

@@ -1,0 +1,319 @@
+﻿@model ACuteArtInterface.Models.ArtworkModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<link rel="stylesheet" href="~/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="~/lib/bootstrap/dist/js//bootstrap.bundle.min.js"></script>
+
+<script type="text/javascript" src="~/lib/bootstrap/dist/js//jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="~/lib/bootstrap/dist/js/slick.min.js"></script>
+
+<script src="~/lib/bootstrap/dist/js/jquery.validate.min.js"></script>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap-select.min.js"></script>
+
+<link href="~/css/modal.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        // Enable Live Search.
+        $('#ArtistList').attr('data-live-search', true);
+
+        $('.selectpicker').selectpicker(
+            {
+                width: '100%',
+                //style: 'btn-warning',
+            });
+    });
+
+</script>
+
+<h1>Artworks</h1>
+<h2>Edit</h2>
+
+<!-- Modal -->
+<div id="dataTargetImageUrl" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">NameEn Image URL Picture</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src=@Model.ImageUrl />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="dataTargetThumbUrl" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">NameEn Thumb URL Picture</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src=@Model.ThumbUrl />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="dataTargetIconUrl" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">NameEn Icon URL Picture</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src=@Model.IconUrl />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="dataTargetSignUrl" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">NameEn Sign URL Picture</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src=@Model.SignUrl />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="dataTargetTradeUrl" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">NameEn Trade URL Picture</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src=@Model.TradeUrl />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ArtworkId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" style="width: 1000px" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="4" style="width: 1000px"> </textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArtistId" class="control-label"></label>
+                @Html.DropDownListFor(m => m.ArtistId, (IEnumerable<SelectListItem>)ViewBag.ArtistList, new { id = "ArtistList", @class = "selectpicker" })
+                <span asp-validation-for="ArtistId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <select asp-for="Type" class="form-control" asp-items="ViewBag.TypeID">
+                    <option value="">-- Select Type --</option>
+                </select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SourceMeta" class="control-label"></label>
+                <textarea asp-for="SourceMeta" class="form-control" rows="4" style="width: 1000px"> </textarea>
+                <span asp-validation-for="SourceMeta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ObjectUrl" class="control-label"></label>
+                <input asp-for="ObjectUrl" disabled class="form-control" style="width: 1000px" />
+
+                <div class="form-group">
+                    <label class="control-label">IOS File</label>
+                    <input class="form-control" name="IosFile" id="IosFile"  type="file"/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Android File</label>
+                    <input class="form-control" name="AndroidFile" id="AndroidFile" type="file" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrefabName" class="control-label"></label>
+                <input asp-for="PrefabName" class="form-control" style="width: 1000px" />
+                <span asp-validation-for="PrefabName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MarshalCode" class="control-label"></label>
+                <textarea asp-for="MarshalCode" class="form-control" rows="4" style="width: 1000px"> </textarea>
+                <span asp-validation-for="MarshalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                3rd Line
+                <input asp-for="SizeDescription" class="form-control" />
+                <span asp-validation-for="SizeDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <input asp-for="Size" class="form-control" />
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Year" class="control-label"></label>
+                <input asp-for="Year" class="form-control" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EditionSize" class="control-label"></label>
+                <input asp-for="EditionSize" class="form-control" />
+                <span asp-validation-for="EditionSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Subtitle
+                <input asp-for="Color" class="form-control" />
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IconUrlFile" class="control-label"></label>
+                <input asp-for="IconUrl" value="@Model.IconUrl" disabled class="form-control" style="width: 1000px" />
+                <input asp-for="IconUrlFile" class="form-control" name="IconUrlFile" id="IconUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <button type="button" data-toggle="modal" data-target="#dataTargetIconUrl">Show</button>
+                <span asp-validation-for="IconUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrlFile" class="control-label"></label>
+                <input asp-for="ImageUrl" value="@Model.ImageUrl" disabled class="form-control" style="width: 1000px" />
+                <input asp-for="ImageUrlFile" class="form-control" name="ImageUrlFile" id="ImageUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <button type="button" data-toggle="modal" data-target="#dataTargetImageUrl">Show</button>
+                <span asp-validation-for="ImageUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThumbUrlFile" class="control-label"></label>
+                <input asp-for="ThumbUrl" value="@Model.ThumbUrl" disabled class="form-control" style="width: 1000px" />
+                <input asp-for="ThumbUrlFile" class="form-control" name="ThumbUrlFile" id="ThumbUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <button type="button" data-toggle="modal" data-target="#dataTargetThumbUrl">Show</button>
+                <span asp-validation-for="ThumbUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TradeUrlFile" class="control-label"></label>
+                <input asp-for="TradeUrl" value="@Model.TradeUrl" disabled class="form-control" style="width: 1000px" />
+                <input asp-for="TradeUrlFile" class="form-control" name="TradeUrlFile" id="TradeUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <button type="button" data-toggle="modal" data-target="#dataTargetTradeUrl">Show</button>
+                <span asp-validation-for="TradeUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SignUrlFile" class="control-label"></label>
+                <input asp-for="SignUrl" value="@Model.SignUrl" disabled class="form-control" style="width: 1000px" />
+                <input asp-for="SignUrlFile" class="form-control" name="SignUrlFile" id="SignUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <button type="button" data-toggle="modal" data-target="#dataTargetSignUrl">Show</button>
+                <span asp-validation-for="SignUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Active" class="control-label"></label>
+                <input asp-for="Active" class="form-control" />
+                <span asp-validation-for="Active" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Guid" class="control-label"></label>
+                <input asp-for="Guid" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="Creation" class="control-label"></label>
+                <input asp-for="Creation" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="WpId" class="control-label"></label>
+                <input asp-for="WpId" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="ApSize" class="control-label"></label>
+                <input asp-for="ApSize" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <input type="button" data-toggle="modal" class="btn btn-primary" data-target="#myModal" value="Save" />
+            </div>
+
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to edit this record?
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" value="Save" id="btnEdit" class="btn btn-primary" />
+                            <input type="button" value="Close" class="btn btn-primary" data-dismiss="modal" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@*@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}*@
+
+@*<h2>Claim details</h2>
+    <ul>
+        @foreach (var claim in User.Claims)
+        {
+            <li><strong>@claim.Type</strong>: @claim.Value</li>
+        }
+    </ul>*@

@@ -1,0 +1,251 @@
+﻿@model ACuteArtInterface.Models.ExhibitionRoomModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h1>Exhibition Room</h1>
+<h2>Edit</h2>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<link href="~/css/modal.css" rel="stylesheet" type="text/css" />
+
+
+<!-- Modal -->
+<div id="mapIconUrl" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Map Icon URL Picture</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src=@Model.MapIconUrl />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="mapUrl" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Map URL Picture</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src=@Model.MapUrl />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="iconUrl" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Icon URL Picture</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src=@Model.IconUrl />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="thumbUrl" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thumb URL Picture</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src=@Model.ThumbUrl />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="RoomId" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="4" style="width: 1000px"> </textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Exhibition
+                <select asp-for="ExhibitionId" class="form-control" asp-items="ViewBag.ExhibitionID">
+                    <option value="">-- Select Exhibition --</option>
+                </select>
+                <span asp-validation-for="ExhibitionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order" class="control-label"></label>
+                <input asp-for="Order" class="form-control" />
+                <span asp-validation-for="Order" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScanRadius" class="control-label"></label>
+                <input asp-for="ScanRadius" class="form-control" />
+                <span asp-validation-for="ScanRadius" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShowOnMap" class="control-label"></label>
+                <input asp-for="ShowOnMap" class="form-control" />
+                <span asp-validation-for="ShowOnMap" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VaGuid" class="control-label"></label>
+                <input asp-for="VaGuid" class="form-control" />
+                <span asp-validation-for="VaGuid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Active" class="control-label"></label>
+                <input asp-for="Active" class="form-control" />
+                <span asp-validation-for="Active" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MapIconUrl" class="control-label"></label>
+                <input asp-for="MapIconUrl" value="@Model.MapIconUrl" class="form-control" readonly style="width: 1000px" />
+                <input asp-for="MapIconUrlFile" id="MapIconUrlFile" name="MapIconUrlFile" type="file" class="form-control" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <button type="button" data-toggle="modal" data-target="#mapIconUrl">Show</button>
+                <span asp-validation-for="MapIconUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MapUrl" class="control-label"></label>
+                <input asp-for="MapUrl" value="@Model.MapUrl" class="form-control" readonly style="width: 1000px" />
+                <input asp-for="MapUrlFile" class="form-control" name="MapUrlFile" id="MapUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <button type="button" data-toggle="modal" data-target="#mapUrl">Show</button>
+                <span asp-validation-for="MapUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Thumb URL (256x256)
+                <input asp-for="ThumbUrl" value="@Model.ThumbUrl" class="form-control" readonly style="width: 1000px" />
+                <input asp-for="ThumbUrlFile" class="form-control" name="ThumbUrlFile" id="ThumbUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <button type="button" data-toggle="modal" data-target="#thumbUrl">Show</button>
+                <span asp-validation-for="ThumbUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Icon URL (Camera Icon) (128x128)
+                <input asp-for="IconUrl" value="@Model.IconUrl" class="form-control" readonly style="width: 1000px" />
+                <input asp-for="IconUrlFile" class="form-control" name="IconUrlFile" id="IconUrlFile" type="file" accept="image/jpeg, image/png, image/bmp, image/tif, image/tiff" />
+                <button type="button" data-toggle="modal" data-target="#iconUrl">Show</button>
+                <span asp-validation-for="IconUrlFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="button" data-toggle="modal" class="btn btn-primary" data-target="#myModal" value="Save" />
+            </div>
+            <h1>Exhibition Room Items</h1>
+            <p>
+                @Html.ActionLink("Create New Exhibition Room Item", "Create", "ExhibitionRoomItem", new { roomId = Model.RoomId })
+            </p>
+            <div class="form-group">
+                @{
+                    List<ExhibitionRoomItemModel> rooms = ViewBag.ExhibitionRoomItems;
+
+                    if (rooms.Count == 0)
+                    {
+                        <h4>There are no Exhibition Room Items Assigned to @Model.Title</h4>
+                    }
+                    else
+                    {
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Artwork Name
+                                    </th>
+                                    <th>
+                                        Order
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @foreach (var room in rooms)
+                                {
+                                    <tr>
+                                        <td>
+                                            @room.Artwork.Name
+                                        </td>
+                                        <td>
+                                            @room.Order
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", "ExhibitionRoomItem", new { id = room.RoomItemId })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                }
+
+            </div>
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to edit this record?
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" value="Save" id="btnEdit" class="btn btn-primary" />
+                            <input type="button" value="Close" class="btn btn-primary" data-dismiss="modal" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ExhibitionId" asp-controller="Exhibition">Back to Selected Exhibition </a> | <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

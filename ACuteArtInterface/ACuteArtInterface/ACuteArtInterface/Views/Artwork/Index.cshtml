@@ -1,0 +1,255 @@
+﻿@model PaginatedList<ACuteArtInterface.Models.ArtworkModel>
+
+@{ ViewData["Title"] = "Artworks"; }
+
+<link href="@Url.Content("~/css/modal.css")" rel="stylesheet" type="text/css" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<h1>Artworks</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Name/Description/Artist Name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Name</a></th>
+            <th>Description</th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["ArtistSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Artist</a></th>
+            <th>Type</th>
+            <th>Source Meta</th>
+            <th>Object Url</th>
+            <th>Prefab Name</th>
+            <th>Marshal Code</th>
+            <th>Size Description</th>
+            <th>Size</th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["YearSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Year</a></th>
+            <th>Edition Size</th>
+            <th>Color</th>
+            <th>Active</th>
+            <th>Image Url</th>
+            <th>Thumb Url</th>
+            <th>Icon Url</th>
+            <th>Trade Url</th>
+            <th>Sign Url</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var obj = 0; var img = 0; var thb = 0; var icn = 0; var trd = 0; var sn = 0;
+
+            foreach (var item in Model)
+            {
+
+                var dataTargetObjectUrl = "modelShowPictureObject" + item.ArtistId + obj;
+                var dataTargetImageUrl = "modelShowPictureImage" + item.ArtistId + img;
+                var dataTargetThumbUrl = "modelShowPictureThumb" + item.ArtistId + thb;
+                var dataTargetIconUrl = "modelShowPictureIcon" + item.ArtistId + icn;
+                var dataTargetTradeUrl = "modelShowPictureTrade" + item.ArtistId + trd;
+                var dataTargetSignUrl = "modelShowPictureSign" + item.ArtistId + sn;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescriptionEn)
+                    </td>
+                    <td width="100px">
+                        @Html.DisplayFor(modelItem => item.ArtistNameEn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TypeItem.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SourceMeta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ObjectUrl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrefabName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MarshalCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SizeDescription)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Size)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Year)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EditionSize)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ColorEn)
+                    </td>
+                    <td>
+                        @( item.Active ? "Yes" : "No" )
+                    </td>
+                    <td>
+                        <!-- Modal -->
+                        <div id=@dataTargetImageUrl class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">@item.NameEn Image URL Picture</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src=@item.ImageUrl />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <button type="button" data-toggle="modal" data-target="#@dataTargetImageUrl">Show</button>
+                    </td>
+
+                    <td>
+                        <!-- Modal -->
+                        <div id=@dataTargetThumbUrl class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">@item.NameEn Thumb URL Picture</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src=@item.ThumbUrl />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <button type="button" data-toggle="modal" data-target="#@dataTargetThumbUrl">Show</button>
+                    </td>
+
+                    <td>
+                        <!-- Modal -->
+                        <div id=@dataTargetIconUrl class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">@item.NameEn Icon URL Picture</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src=@item.IconUrl />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <button type="button" data-toggle="modal" data-target="#@dataTargetIconUrl">Show</button>
+                    </td>
+                    <td>
+                        <!-- Modal -->
+                        <div id=@dataTargetTradeUrl class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">@item.NameEn Trade URL Picture</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src=@item.TradeUrl />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <button type="button" data-toggle="modal" data-target="#@dataTargetTradeUrl">Show</button>
+                    </td>
+                    <td>
+                        <!-- Modal -->
+                        <div id=@dataTargetSignUrl class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">@item.NameEn Sign URL Picture</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src=@item.SignUrl />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <button type="button" data-toggle="modal" data-target="#@dataTargetSignUrl">Show</button>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ArtworkId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ArtworkId">Details</a>
+                    </td>
+                </tr>
+
+                obj++; img++; thb++; icn++; trd++; sn++;
+            }
+        }
+    </tbody>
+</table>
+@{ var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : ""; }
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
+
+@*<h2>Claim details</h2>
+    <ul>
+        @foreach (var claim in User.Claims)
+        {
+    <li><strong>@claim.Type</strong>: @claim.Value</li>
+    }
+    </ul>*@

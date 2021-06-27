@@ -1,0 +1,194 @@
+﻿@model ACuteArtInterface.Models.ExhibitionRoomModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<link href="@Url.Content("~/css/modal.css")" rel="stylesheet" type="text/css" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<h1>Exhibition Room</h1>
+<h2>Details</h2>
+
+<div>
+    <h4>Exhibition Room</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Exhibition.Title)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Exhibition.Title)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Order)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Order)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScanRadius)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScanRadius)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ShowOnMap)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ShowOnMap)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.VaGuid)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.VaGuid)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Va)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Va)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MapIconUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <!-- Modal -->
+            <div id="dataTargetMapIconUrl" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">@Model.TitleEn Map Icon URL Picture</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <img src=@Model.MapIconUrl />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" data-toggle="modal" data-target="#dataTargetMapIconUrl">Map Icon URL Picture</button>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MapUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <!-- Modal -->
+            <div id="dataTargetMapUrl" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">@Model.TitleEn Map Icon URL Picture</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <img src=@Model.MapUrl />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" data-toggle="modal" data-target="#dataTargetMapUrl">Map URL Picture</button>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IconUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <!-- Modal -->
+            <div id="dataTargetIconUrl" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">@Model.TitleEn Icon URL Picture</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <img src=@Model.IconUrl />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" data-toggle="modal" data-target="#dataTargetIconUrl">Icon URL Picture</button>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ThumbUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <!-- Modal -->
+            <div id="dataTargetThumbUrl" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">@Model.TitleEn Thumb URL Picture</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <img src=@Model.ThumbUrl />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" data-toggle="modal" data-target="#dataTargetThumbUrl">Thumb URL Picture</button>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RoomId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
